@@ -1,34 +1,35 @@
-## 示例站点
-[http://bt.xiandan.in](http://bt.xiandan.in)
+[[中文文档]](https://github.com/dengyuhan/magnetW/wiki)
 
-示例站点所用图标来自[iconfont](https://www.iconfont.cn)  
-示例服务器的配置极低，所以不太稳定，最好自行搭建  
+## 简介
+__磁力搜不收录磁力链接，只是磁力的搬运工__  
+>
+>本项目是[Mac版磁力搜](https://github.com/youusername/magnetX)的衍生项目  
+>根据制定的解析规则，一套代码解析多个磁力网站的HTML，将各个网站不同格式的搜索结果统一格式化
+
+## 示例站点
+[https://bt.lansou.pw](https://bt.lansou.pw)  
+[https://biedian.me](https://biedian.me)（需要代理）
+
+示例站点较不稳定，建议自行搭建，所用图标来自[iconfont](https://www.iconfont.cn)  
+
+#### 示例站点环境参考
+* [搬瓦工](https://bwh88.net/aff.php?aff=48595)
+* [宝塔面板](https://www.bt.cn/?invite_code=MV9va2p0bmQ=)
+* [Tomcat9](https://tomcat.apache.org/download-90.cgi)
+* [JDK8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+
 
 ## 截图
-![](screenshots/5.gif)
+<img src="screenshots/5.gif" height="320"/><img src="screenshots/9.gif" height ="320"/>
 
 ## 其它版本
 > Mac版：[magnetX](https://github.com/youusername/magnetX)
 > 
-> 小程序：  
-> <img src="screenshots/mini.jpg" width="150"/>
+> 小程序：[magnetw-mini](https://github.com/dengyuhan/magnetw-mini)
 
-## 2.0特性
-#### 2.0改动巨大，不支持从1.x升级到2.x，旧版请谨慎使用
->1. 规则文件支持本地文件和网络文件
->2. 支持自定义配置
->3. 支持多种排序
->4. 增加流量统计
->5. 增加搜索预加载
->6. 增加数据API
->7. 增加管理API
->8. 支持Tracker服务器
+## 免责说明
+本项目仅作为爬虫技术交流学习，__切勿非法使用__
 
-## 快速搭建
-在[releases](https://github.com/dengyuhan/magnetW/releases)列表下载编译好的war包，发布到Tomcat即可。
-
-## 赞赏
-<img src="screenshots/zanshang.jpg" width="200"/>
-
-## 其它说明
-自定义配置和规则可以看[Config.md](Config.md)
+## 相关项目
+[jsoup](https://github.com/jhy/jsoup)  
+[HtmlCleaner](https://mvnrepository.com/artifact/net.sourceforge.htmlcleaner/htmlcleaner)

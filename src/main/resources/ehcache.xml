@@ -13,14 +13,24 @@
 
     <!-- 配置名为magnetList的缓存区 -->
     <cache name="magnetList"
-        maxElementsInMemory="10000"
+        maxElementsInMemory="15000"
         eternal="false"
         overflowToDisk="false"
-        diskSpoolBufferSizeMB="300"
+        diskSpoolBufferSizeMB="500"
         diskPersistent="true"
         diskExpiryThreadIntervalSeconds="600"
         timeToIdleSeconds="86400"
         timeToLiveSeconds="259200" />
+
+
+    <!-- 配置名为magnetDetail的缓存区-->
+    <cache name="magnetDetail"
+        maxElementsInMemory="1000"
+        eternal="true"
+        overflowToDisk="true"
+        diskSpoolBufferSizeMB="500"
+        diskPersistent="true"
+        diskExpiryThreadIntervalSeconds="7200"/>
 </ehcache>
 
     <!--

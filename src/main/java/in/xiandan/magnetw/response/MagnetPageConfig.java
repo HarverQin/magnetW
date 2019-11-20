@@ -9,36 +9,30 @@ public class MagnetPageConfig {
     private String versionName;
     private String searchPlaceholder;
     private String versionLink;
-    private boolean busuanziEnabled;
-    private boolean busuanziShow;
     private boolean trackersEnabled;
+    private boolean reportEnabled;
+    private boolean feedbackEnabled;
+    private boolean resultToast;
 
     public MagnetPageConfig(ApplicationConfig config) {
         this.versionName = config.versionName;
         this.searchPlaceholder = config.searchPlaceholder;
         this.versionLink = config.versionLink;
-        this.busuanziEnabled = config.busuanziEnabled;
-        this.busuanziShow = config.busuanziShow;
         this.trackersEnabled = config.trackersEnabled;
+        this.reportEnabled = config.reportEnabled;
+        this.feedbackEnabled = config.feedbackEnabled;
+        this.resultToast = config.resultToast;
     }
 
     public MagnetPageConfig() {
     }
 
-    public boolean isBusuanziEnabled() {
-        return busuanziEnabled;
+    public boolean isTrackersEnabled() {
+        return trackersEnabled;
     }
 
-    public void setBusuanziEnabled(boolean busuanziEnabled) {
-        this.busuanziEnabled = busuanziEnabled;
-    }
-
-    public boolean isBusuanziShow() {
-        return busuanziShow;
-    }
-
-    public void setBusuanziShow(boolean busuanziShow) {
-        this.busuanziShow = busuanziShow;
+    public void setTrackersEnabled(boolean trackersEnabled) {
+        this.trackersEnabled = trackersEnabled;
     }
 
     public String getVersionName() {
@@ -63,5 +57,29 @@ public class MagnetPageConfig {
 
     public void setVersionLink(String versionLink) {
         this.versionLink = versionLink;
+    }
+
+    public boolean isReportEnabled() {
+        return reportEnabled;
+    }
+
+    public void setReportEnabled(boolean reportEnabled) {
+        this.reportEnabled = reportEnabled;
+    }
+
+    public boolean isResultToast() {
+        return resultToast;
+    }
+
+    public void setResultToast(boolean resultToast) {
+        this.resultToast = resultToast;
+    }
+
+    public boolean isFeedbackEnabled() {
+        return feedbackEnabled;
+    }
+
+    public void setFeedbackEnabled(boolean feedbackEnabled) {
+        this.feedbackEnabled = feedbackEnabled;
     }
 }

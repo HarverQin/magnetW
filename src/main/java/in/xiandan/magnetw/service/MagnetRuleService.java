@@ -14,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -135,23 +137,43 @@ public class MagnetRuleService {
             magnetRuleMap = new LinkedHashMap<String, MagnetRule>();
             sites = new ArrayList<MagnetRule>();
 
-            List<MagnetRule> rules = loadMagnetRule();
+            logger.info("准备加载源站规则...");
 
-            StringBuilder log = new StringBuilder();
-            for (MagnetRule rule : rules) {
-                if (config.proxyIgnore && rule.isProxy()) {
-                    log.append("[忽略]--->").append(rule.getSite()).append(" : ").append(rule.getUrl()).append("\n");
-                    continue;
+            try {
+                int failCount = 0;
+
+                List<MagnetRule> rules = loadMagnetRule();
+
+                StringBuilder log = new StringBuilder();
+                for (MagnetRule rule : rules) {
+                    if (config.proxyIgnore && rule.isProxy()) {
+                        log.append("[忽略]--->").append(rule.getSite()).append(" : ").append(rule.getUrl()).append("\n");
+                        continue;
+                    }
+                    try {
+                        rule.setHost(new URL(rule.getUrl()).getHost());
+
+                        magnetRuleMap.put(rule.getSite(), rule);
+                        sites.add(rule);
+                    } catch (MalformedURLException e) {
+                        failCount++;
+                        log.append("[失败]--->").append(rule.getSite()).append(" : ").append(rule.getUrl()).append("--->").append(e.getMessage()).append("\n");
+                        continue;
+                    }
+                    log.append("[成功]--->").append(rule.getSite()).append(" : ").append(rule.getUrl()).append("\n");
                 }
-                magnetRuleMap.put(rule.getSite(), rule);
-                sites.add(rule);
-                log.append("[加载]--->").append(rule.getSite()).append(" : ").append(rule.getUrl()).append("\n");
+                log.append(rules.size());
+                log.append("个网站规则加载完成，其中启用");
+                log.append(magnetRuleMap.size());
+                log.append("个，忽略");
+                log.append(rules.size() - magnetRuleMap.size()-failCount);
+                log.append("个，失败");
+                log.append(failCount);
+                log.append("个");
+                logger.info(log.toString());
+            } catch (Exception e) {
+                logger.error("规则文件解析失败，请检查规则内容", e);
             }
-            log.append(rules.size());
-            log.append("个网站规则加载完成，忽略");
-            log.append(rules.size() - magnetRuleMap.size());
-            log.append("个");
-            logger.info(log.toString());
         }
         return magnetRuleMap;
     }
@@ -170,7 +192,7 @@ public class MagnetRuleService {
     }
 
     private List<String> loadTrackers() {
-        String url = "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt";
+        String url = config.trackersUrl;
         RestTemplate rest = new RestTemplate();
         ResponseEntity<String> response = rest.exchange(url, HttpMethod.GET, null, String.class);
         String body = response.getBody();
